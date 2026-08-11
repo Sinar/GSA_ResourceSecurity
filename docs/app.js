@@ -161,7 +161,8 @@ function openModal(f) {
   const img = f.image || f.thumb || "https://via.placeholder.com/700x350?text=No+image";
 
   const stats = [
-    ["Footprint area", `${fmtNum(f.area_m2, 0)} m²`],
+    ["Footprint area (polygon)", `${fmtNum(f.area_m2, 0)} m²`],
+    ["Footprint area (bounding box, for reference)", f.bbox_area_m2 ? `${fmtNum(f.bbox_area_m2, 0)} m²` : "—"],
     ["Estimated power", mw ? `${fmtNum(mw)} MW` : "—"],
     ["Disclosed capacity", f.disclosed_mw ? `${fmtNum(f.disclosed_mw)} MW (operator-disclosed)` : "Not disclosed (modelled)"],
     ["Estimated annual energy", f.energy_mwh_yr ? `${fmtNum(f.energy_mwh_yr / 1000, 1)} GWh/yr` : "—"],
@@ -169,16 +170,24 @@ function openModal(f) {
     ["Estimated water (regional)", f.water_regional_l_yr ? `${fmtNum(f.water_regional_l_yr / 1e6, 1)}M L/yr` : "—"],
     ["Estimated water (optimised)", f.water_optimized_l_yr ? `${fmtNum(f.water_optimized_l_yr / 1e6, 1)}M L/yr` : "—"],
     ["Waste heat", f.waste_heat_gj_yr ? `${fmtNum(f.waste_heat_gj_yr, 0)} GJ/yr` : "—"],
-    ["CV detection confidence", f.confidence ? fmtNum(f.confidence, 3) : "—"],
+    ["Power intensity", f.power_w_per_sqft ? `${fmtNum(f.power_w_per_sqft, 1)} W/sqft` : "—"],
+    ["Water intensity", f.water_l_per_sqft_yr ? `${fmtNum(f.water_l_per_sqft_yr, 0)} L/sqft/yr` : "—"],
+    ["Carbon intensity", f.carbon_kg_per_sqft_yr ? `${fmtNum(f.carbon_kg_per_sqft_yr, 2)} kg CO₂e/sqft/yr` : "—"],
     ["Coordinates", f.lat && f.lon ? `${f.lat.toFixed(5)}, ${f.lon.toFixed(5)}` : "—"],
   ];
 
   let noteHtml = "";
+  if (f.fun_comparison) {
+    noteHtml += `<div class="modal-note fun">${f.fun_comparison}</div>`;
+  }
   if (f.qa_notes) {
     noteHtml += `<div class="modal-note danger"><strong>QA note:</strong> ${f.qa_notes}</div>`;
   }
   if (f.flags) {
     noteHtml += `<div class="modal-note"><strong>Detection flags:</strong> ${f.flags}</div>`;
+  }
+  if (f.qc_flag) {
+    noteHtml += `<div class="modal-note"><strong>QC:</strong> ${f.qc_flag} — flagged for manual visual review, not an automatic exclusion.</div>`;
   }
 
   document.getElementById("modalBody").innerHTML = `
