@@ -15,7 +15,7 @@
 
 GSA Resource Security is an independent, satellite-derived audit of the physical resource footprint of data centre facilities in Malaysia: estimated power demand, energy consumption, water use, carbon emissions, and land-use/deforestation impact, cross-referenced against the regulatory and legislative record. It was built because operators routinely withhold facility-level resource figures under non-disclosure agreements and national-security framing, leaving no independent, verifiable account of what this sector actually costs the country.
 
-Developed by [Sinar Project](https://sinarproject.org) under the Global South Alliance - Data and Democracy Fun (Data Privacy Brasil / National Endowment for Democracy), as part of the *Resource Security: Data Center Resource Extraction and Autonomy in the Global South* project.
+Developed by [Sinar Project](https://sinarproject.org) with support from the Global South Alliance Datafication and Democracy Fund, as part of the *Resource Security: Data Center Resource Extraction and Autonomy in the Global South* project.
 
 **Status:** research prototype produced for a fixed-term subgrant (March–September 2026). Not maintained as production software; see [Known Limitations](#known-limitations) before relying on any figure.
 
@@ -102,7 +102,7 @@ Other figures benchmarked in the paper: Malaysia's pledged data centre investmen
 
 ### Companion documents
 
-These are the technical methodology, resource-estimation formulas, regulatory/legislative corpus analysis, land-cover change rollout, and full caveats, maintained alongside the underlying data corpus. They are grant deliverables under Subgrant Agreement No. 007, published as static files under `docs/reports/` in this repository.
+These are the technical methodology, resource-estimation formulas, regulatory/legislative corpus analysis, land-cover change rollout, and full caveats, maintained alongside the underlying data corpus. They are grant deliverables under the project's funding agreement, published as static files under `docs/reports/` in this repository.
 
 - [Full Project Methodology - Satellite, Regulatory Corpus, and Land-Cover Change](docs/reports/full-project-methodology.docx)
 - [Economic Valuation Paper Draft - Vintage Capital Heterogeneity and Hidden Natural Capital Loss](docs/reports/economic-valuation-paper.docx)
@@ -122,6 +122,7 @@ These are the technical methodology, resource-estimation formulas, regulatory/le
 - [UN System of Environmental-Economic Accounting (SEEA) Central Framework](https://seea.un.org/content/seea-central-framework) — UN Statistics Division
 - [Hansen et al. Global Forest Change dataset](https://storage.googleapis.com/earthenginepartners-hansen/GFC-2024-v1.12/download.html) — University of Maryland / Google Earth Engine
 - [Global Forest Watch](https://www.globalforestwatch.org) — World Resources Institute, area-of-interest analysis tool used for the land-cover change rollout
+- [Global South Alliance Datafication and Democracy Fund](https://sinarproject.org) — funding agreement governing this project; contact the project team for details
 
 ## Documentation
 
@@ -145,7 +146,7 @@ This is a research subgrant output, not a supported product. For questions about
 
 ## Funding and Acknowledgement
 
-Produced under Subgrant Agreement No. 007 between Data Privacy Brasil and Sinar Project PLT, part of Grant Agreement 2024-1046 between the National Endowment for Democracy and Data Privacy Brasil.
+Produced with support from the Global South Alliance Datafication and Democracy Fund and Sinar Project.
 
 ## License
 
