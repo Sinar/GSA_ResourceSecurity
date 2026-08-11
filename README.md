@@ -15,7 +15,7 @@
 
 GSA Resource Security is an independent, satellite-derived audit of the physical resource footprint of data centre facilities in Malaysia: estimated power demand, energy consumption, water use, carbon emissions, and land-use/deforestation impact, cross-referenced against the regulatory and legislative record. It was built because operators routinely withhold facility-level resource figures under non-disclosure agreements and national-security framing, leaving no independent, verifiable account of what this sector actually costs the country.
 
-Developed by [Sinar Project](https://sinarproject.org) under Subgrant Agreement No. 007 (Data Privacy Brasil / National Endowment for Democracy), as part of the *Resource Security: Data Center Resource Extraction and Autonomy in the Global South* project.
+Developed by [Sinar Project](https://sinarproject.org) under the Global South Alliance - Data and Democracy Fun (Data Privacy Brasil / National Endowment for Democracy), as part of the *Resource Security: Data Center Resource Extraction and Autonomy in the Global South* project.
 
 **Status:** research prototype produced for a fixed-term subgrant (March–September 2026). Not maintained as production software; see [Known Limitations](#known-limitations) before relying on any figure.
 
