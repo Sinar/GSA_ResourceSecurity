@@ -37,12 +37,13 @@ Python, OpenCV, NumPy · Google Places API / Google Static Maps API (imagery acq
 ## Repository Structure
 
 ```
-src/      pipeline scripts (see Pipeline Order below)
-docs/     public GitHub Pages site: interactive map, visual library, per-facility estimates
-logs/     running workflow/methodology log
+src/          pipeline scripts (see Pipeline Order below)
+docs/         public GitHub Pages site: interactive map, visual library, per-facility estimates
+docs/reports/ companion deliverable reports (methodology, valuation, policy audit, briefs), see References
+logs/         running workflow/methodology log
 ```
 
-This repository contains the pipeline **code** and a **derived public dataset extract** (`docs/data/manifest.json` and the satellite captures under `docs/images` / `docs/thumbs`, covering the 71 measured buildings and their resource estimates). It does not contain the underlying raw facility coordinate database, the full satellite imagery archive, or the policy/Hansard document corpus, which are maintained separately by the project team; see [Documentation](#documentation) for the companion reports that describe them in full.
+This repository contains the pipeline **code**, a **derived public dataset extract** (`docs/data/manifest.json` and the satellite captures under `docs/images` / `docs/thumbs`, covering the 71 measured buildings and their resource estimates), and the **companion deliverable reports** (`docs/reports/`, see [References](#references)). It does not contain the underlying raw facility coordinate database, the full satellite imagery archive, or the policy/Hansard document corpus itself, which are maintained separately by the project team on request.
 
 ## Quick Start
 
@@ -79,6 +80,8 @@ To run it locally: `cd docs && python3 -m http.server 8000`, then open `localhos
 
 ## Methodology (Brief)
 
+The facility list was compiled and satellite imagery acquired during Phase 2 of the project workflow (March-June 2026); CV modelling, resource estimation, and the independent QA re-check ran across that same window, with the land-cover change rollout and Hansard corpus search completed by August 2026. Figures reflect the state of public disclosure as of that period, not real-time; see Known Limitations below.
+
 1. **Imagery acquisition**: candidate facility addresses/coordinates resolved via the Google Places API, satellite imagery pulled via the Google Static Maps API.
 2. **Building detection**: a confidence-scored, abstaining OpenCV pipeline (colour-space masking, dual-direction Otsu thresholding, multi-factor contour filtering) measures each facility's physical footprint; it declines to output a box where nothing reliable is found rather than forcing a detection. 124 candidate facilities were processed.
 3. **Validation and deduplication**: detected boxes are checked against source imagery, then co-located multi-tenant entries are collapsed into physical-building records (with an explicit, documented exception for genuinely distinct multi-building campuses sharing one imprecise geocode, e.g. AirTrunk JHB2/JHB3/JHB4). This reduced the candidate set to 71 physical buildings.
@@ -99,18 +102,18 @@ Other figures benchmarked in the paper: Malaysia's pledged data centre investmen
 
 ### Companion documents
 
-These are the technical methodology, resource-estimation formulas, regulatory/legislative corpus analysis, land-cover change rollout, and full caveats, maintained alongside the underlying data corpus. They are grant deliverables under Subgrant Agreement No. 007 and are not currently published to this repository; available from the project team on request.
+These are the technical methodology, resource-estimation formulas, regulatory/legislative corpus analysis, land-cover change rollout, and full caveats, maintained alongside the underlying data corpus. They are grant deliverables under Subgrant Agreement No. 007, published as static files under `docs/reports/` in this repository.
 
-- Full Project Methodology - Satellite, Regulatory Corpus, and Land-Cover Change
-- Economic Valuation Paper Draft - Vintage Capital Heterogeneity and Hidden Natural Capital Loss
-- GSA Master Facility Database - Methodology Note and Data Dictionary
-- QA Sample Report - Positional Accuracy and CV Extraction Spot-Check
-- Policy Audit Report - Malaysia Data Centre Governance with Indonesia Comparison
-- Comparative Regulatory Desk Review - Indonesia vs Malaysia Data Centre Governance
-- Resource Security - Public Policy Report
-- Policy Brief 1 - Closing the Cumulative-Impact Blind Spot (regulator-facing)
-- Policy Brief 2 - Checking a Data Centre's Footprint (journalist-facing)
-- Preliminary Results Report - Expanded Background and Assessment
+- [Full Project Methodology - Satellite, Regulatory Corpus, and Land-Cover Change](docs/reports/full-project-methodology.docx)
+- [Economic Valuation Paper Draft - Vintage Capital Heterogeneity and Hidden Natural Capital Loss](docs/reports/economic-valuation-paper.docx)
+- [GSA Master Facility Database - Methodology Note and Data Dictionary](docs/reports/master-database-methodology-note.docx)
+- [QA Sample Report - Positional Accuracy and CV Extraction Spot-Check](docs/reports/qa-sample-report.docx)
+- [Policy Audit Report - Malaysia Data Centre Governance with Indonesia Comparison](docs/reports/policy-audit-report.docx)
+- [Comparative Regulatory Desk Review - Indonesia vs Malaysia Data Centre Governance](docs/reports/comparative-regulatory-desk-review.docx)
+- [Resource Security - Public Policy Report](docs/reports/public-policy-report.docx)
+- [Policy Brief 1 - Closing the Cumulative-Impact Blind Spot](docs/reports/policy-brief-1-regulators.docx) (regulator-facing)
+- [Policy Brief 2 - Checking a Data Centre's Footprint](docs/reports/policy-brief-2-journalists.docx) (journalist-facing)
+- [Preliminary Results Report - Expanded Background and Assessment](docs/reports/preliminary-results-report.docx)
 
 ### Policy, legal, and data-source references
 
@@ -122,7 +125,7 @@ These are the technical methodology, resource-estimation formulas, regulatory/le
 
 ## Documentation
 
-The technical methodology, resource-estimation formulas, regulatory/legislative corpus analysis, land-cover change rollout, and full caveats are documented in the set of companion reports listed under [References](#references), maintained alongside the underlying data corpus and available from the project team on request.
+The technical methodology, resource-estimation formulas, regulatory/legislative corpus analysis, land-cover change rollout, and full caveats are documented in the set of companion reports listed under [References](#references), published as static files under `docs/reports/` and maintained alongside the underlying data corpus.
 
 ## Known Limitations
 

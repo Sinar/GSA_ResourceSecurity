@@ -57,6 +57,7 @@ function renderMap() {
     maxZoom: 18,
   }).addTo(MAP);
 
+  const bounds = [];
   FACILITIES.forEach((f) => {
     if (f.lat === null || f.lon === null) return;
     const included = isIncluded(f);
@@ -79,7 +80,16 @@ function renderMap() {
       if (link) link.addEventListener("click", (e) => { e.preventDefault(); openModal(f); });
     });
     MARKERS.push({ marker, facility: f });
+    // Exclude out-of-country geocoding failures (e.g. Marina Bay, Metro Manila) from the
+    // auto-fit bounds so a handful of bad coordinates don't zoom the map out to a useless extent.
+    if (!(f.flags || "").includes("OUTSIDE_MALAYSIA") && !(f.flags || "").includes("COORDINATE_OUTSIDE")) {
+      bounds.push([f.lat, f.lon]);
+    }
   });
+
+  if (bounds.length > 0) {
+    MAP.fitBounds(bounds, { padding: [24, 24], maxZoom: 9 });
+  }
 }
 
 function bindControls() {
