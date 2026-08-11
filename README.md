@@ -70,6 +70,8 @@ Each script's role is documented in its module comments. `qa_recheck.py` is repo
 
 ## Visual Library
 
+![Resource Security visual library: stats bar, interactive map, and facility gallery](assets/site-screenshot.jpg)
+
 The [live site](https://sinar.github.io/GSA_ResourceSecurity/) (source in `docs/`) provides:
 
 - An interactive map of all 71 independently measured facilities, colour-coded by inclusion status.
