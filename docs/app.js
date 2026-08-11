@@ -155,6 +155,7 @@ function renderGallery() {
 }
 
 function openModal(f) {
+  if (MAP) MAP.closePopup();
   const included = isIncluded(f);
   const mw = powerMW(f);
   const img = f.image || f.thumb || "https://via.placeholder.com/700x350?text=No+image";
