@@ -48,6 +48,13 @@ function renderStats() {
   document.getElementById("statsBar").innerHTML = stats.map(([num, label]) =>
     `<div class="stat-box"><div class="num">${num}</div><div class="label">${label}</div></div>`
   ).join("");
+
+  const EV_CHARGER_KW = 7; // typical home Level-2 EV charger draw
+  const totalKW = totalMW * 1000;
+  const nCars = totalKW / EV_CHARGER_KW;
+  const carStr = nCars < 1000 ? `~${fmtNum(nCars, 0)}` : `~${fmtNum(nCars / 1000, 1)}k`;
+  document.getElementById("statsComparison").textContent =
+    `Running continuously, that combined power draw is comparable to ${carStr} home EV chargers all charging at once, around the clock.`;
 }
 
 function renderMap() {

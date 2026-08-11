@@ -18,7 +18,6 @@ THUMB_DIR = os.path.join(OUT_DIR, "thumbs")
 os.makedirs(IMG_DIR, exist_ok=True)
 os.makedirs(THUMB_DIR, exist_ok=True)
 
-RICE_COOKER_W = 800     # typical continuous draw, Malaysian household rice cooker
 EV_CHARGER_KW = 7       # typical home Level-2 EV charger draw
 
 def safe_name(name):
@@ -27,17 +26,9 @@ def safe_name(name):
 def fun_comparison(power_kw):
     if not power_kw:
         return ""
-    n_cookers = power_kw * 1000 / RICE_COOKER_W
     n_cars = power_kw / EV_CHARGER_KW
-    if n_cookers < 1000:
-        cooker_str = f"~{n_cookers:,.0f} rice cookers"
-    else:
-        cooker_str = f"~{n_cookers/1000:,.1f}k rice cookers"
-    if n_cars < 1000:
-        car_str = f"~{n_cars:,.0f} home EV chargers"
-    else:
-        car_str = f"~{n_cars/1000:,.1f}k home EV chargers"
-    return f"Running continuously, this facility's estimated power draw is comparable to {cooker_str} left on non-stop, or {car_str} all charging at once, around the clock."
+    car_str = f"~{n_cars:,.0f} home EV chargers" if n_cars < 1000 else f"~{n_cars/1000:,.1f}k home EV chargers"
+    return f"Running continuously, this facility's estimated power draw is comparable to {car_str} all charging at once, around the clock."
 
 rows = list(csv.DictReader(open(MASTER_V4)))
 manifest = []
