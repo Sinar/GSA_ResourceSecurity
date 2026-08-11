@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resource Security: Malaysia Data Centre Visual Library</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>Resource Security</h1>
+    <p class="subtitle">An independently measured visual library of 71 data centre buildings in Malaysia &mdash; satellite-derived footprint, power, water, and carbon estimates.</p>
+    <p class="credit">Sinar Project PLT | Subgrant Agreement No. 007 (Data Privacy Brasil / National Endowment for Democracy)</p>
+  </div>
+</header>
+
+<section class="stats-bar" id="statsBar"></section>
+
+<nav class="controls">
+  <input type="text" id="searchBox" placeholder="Search by facility or tenant name&hellip;">
+  <select id="statusFilter">
+    <option value="all">All facilities (71)</option>
+    <option value="included">Included in resource totals</option>
+    <option value="excluded">Excluded (QA flagged)</option>
+  </select>
+  <select id="sortBy">
+    <option value="name">Sort: Name (A&ndash;Z)</option>
+    <option value="power">Sort: Power (highest first)</option>
+    <option value="area">Sort: Footprint area (largest first)</option>
+    <option value="carbon">Sort: Carbon (highest first)</option>
+  </select>
+  <span class="result-count" id="resultCount"></span>
+</nav>
+
+<section id="map"></section>
+
+<main>
+  <div id="gallery" class="gallery"></div>
+</main>
+
+<div id="modalOverlay" class="modal-overlay">
+  <div class="modal">
+    <button id="modalClose" class="modal-close" aria-label="Close">&times;</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<footer>
+  <p>Data is independently derived from satellite imagery and, where available, operator-disclosed capacity. Estimates should be read as order-of-magnitude figures, not precise measurements. See the companion Full Project Methodology and Verification &amp; QA Report for full caveats.</p>
+  <p>Building the case for local resource sovereignty in the Global South.</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
