@@ -119,7 +119,6 @@ These are the technical methodology, resource-estimation formulas, regulatory/le
 - [UN System of Environmental-Economic Accounting (SEEA) Central Framework](https://seea.un.org/content/seea-central-framework) — UN Statistics Division
 - [Hansen et al. Global Forest Change dataset](https://storage.googleapis.com/earthenginepartners-hansen/GFC-2024-v1.12/download.html) — University of Maryland / Google Earth Engine
 - [Global Forest Watch](https://www.globalforestwatch.org) — World Resources Institute, area-of-interest analysis tool used for the land-cover change rollout
-- [Subgrant Agreement No. 007](https://sinarproject.org) and Grant Agreement 2024-1046 (Data Privacy Brasil / National Endowment for Democracy) — governing agreement for this project; contact the project team for the signed document
 
 ## Documentation
 
