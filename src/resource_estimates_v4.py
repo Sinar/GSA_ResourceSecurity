@@ -18,7 +18,16 @@ out_rows = []
 
 for r in rows:
     flags = r["CV_Flags"]
-    excluded = "NO_CONFIDENT_DETECTION" in flags or "COORDINATE_OUTSIDE_MALAYSIA" in flags or not r["Area_m2"]
+    # A missing/no-confident-detection footprint should only exclude a facility
+    # from resource totals when we also have no other basis for its power figure.
+    # Disclosed-capacity facilities get their MW from the operator, not from
+    # image area, so a reviewer being unable to visually confirm the building in
+    # a low-quality or out-of-date satellite frame should not zero out an
+    # independently confirmed capacity. A bad coordinate (genuinely wrong
+    # location) is a different problem and excludes regardless of disclosure.
+    coordinate_bad = "COORDINATE_OUTSIDE_MALAYSIA" in flags
+    no_footprint = "NO_CONFIDENT_DETECTION" in flags or not r["Area_m2"]
+    excluded = coordinate_bad or (no_footprint and not r["Disclosed_MW"])
 
     base = {
         "Building_ID": r["Building_ID"], "Tenant_Names": r["Tenant_Names"],
@@ -35,11 +44,11 @@ for r in rows:
                           "Status": "EXCLUDED - unconfirmed location"})
         continue
 
-    area = float(r["Area_m2"])
+    area = float(r["Area_m2"]) if r["Area_m2"] else None
     if r["Disclosed_MW"]:
         facility_power_kw = float(r["Disclosed_MW"]) * 1000
         power_source = f"DISCLOSED ({r['Disclosed_MW']} MW)"
-        status = "OK - disclosed capacity"
+        status = "OK - disclosed capacity" if area else "OK - disclosed capacity (no confirmed footprint image)"
     else:
         facility_power_kw = area * POWER_DENSITY_KW_M2 * PUE
         power_source = "MODELED (unvalidated coefficient)"
