@@ -13,7 +13,7 @@
 
 ---
 
-GSA Resource Security is an independent, satellite-derived audit of the physical resource footprint of data centre facilities in Malaysia: estimated power demand, energy consumption, water use, carbon emissions, and land-use/deforestation impact, cross-referenced against the regulatory and legislative record. It was built because operators routinely withhold facility-level resource figures under non-disclosure agreements and national-security framing, leaving no independent, verifiable account of what this sector actually costs the country.
+GSA Resource Security is an independent, satellite-derived audit of the physical resource footprint of data centre facilities in Malaysia: estimated power demand, energy consumption, water use, carbon emissions, and land-use/deforestation impact, cross-referenced against the regulatory and legislative record. It was built because operators routinely withhold facility-level resource figures via non-disclosure agreements and national-security framing, resulting in an absence of an independent, verifiable account of what the data centre sector costs the country in terms of resources.
 
 Developed by [Sinar Project](https://sinarproject.org) with support from the Global South Alliance Datafication and Democracy Fund, as part of the *Resource Security: Data Center Resource Extraction and Autonomy in the Global South* project.
 
@@ -26,7 +26,7 @@ Developed by [Sinar Project](https://sinarproject.org) with support from the Glo
 - **Deduplication**: collapses co-located multi-tenant entries into physical-building records, with explicit handling for genuinely distinct multi-building campuses sharing one imprecise geocode.
 - **Resource-extraction estimation**: converts footprint area into estimated power, annual energy, carbon emissions, and water use (optimised and regional water-usage-effectiveness scenarios), keeping operator-disclosed and modelled facilities strictly separate.
 - **Independent QA re-check**: a second, separate verification pass (geometric re-check, coordinate-region plausibility check) run across the full dataset, not just the original validation sample; findings are applied as a scripted pipeline step, not a manual edit.
-- **Regulatory and legislative corpus analysis**: environmental-review policy mapping across every Malaysian jurisdiction with a measured facility, plus a systematic keyword search and triage of the federal and Johor State Assembly Hansard record (2008–2026).
+- **Regulatory and legislative corpus analysis**: environmental-review policy mapping across each Malaysian jurisdiction with a measured facility, plus a systematic keyword search and triage of the federal and Johor State Assembly Hansard record (2008–2026).
 - **Land-cover change rollout**: facilities clustered into geographic corridors and checked against Hansen Global Forest Change data to quantify deforestation associated with development corridors.
 - **Public visual library**: an interactive map, searchable/filterable gallery of every measured facility's satellite capture, and per-facility resource estimates, published as a static site (see [Live visual library](https://sinar.github.io/GSA_ResourceSecurity/)).
 
@@ -76,20 +76,20 @@ The [live site](https://sinar.github.io/GSA_ResourceSecurity/) (source in `docs/
 
 - An interactive map of all 71 independently measured facilities, colour-coded by inclusion status.
 - A searchable, filterable, sortable gallery of each facility's satellite capture with its detected bounding box.
-- A detail view per facility: footprint area, estimated power/energy/carbon/water/waste heat, detection confidence, QA flags, and any independent-verification notes.
+- A detailed view of each facility: footprint area, estimated power/energy/carbon/water/waste heat, detection confidence, QA flags, and any independent-verification notes.
 
 To run it locally: `cd docs && python3 -m http.server 8000`, then open `localhost:8000`.
 
 ## Methodology (Brief)
 
-The facility list was compiled and satellite imagery acquired during Phase 2 of the project workflow (March-June 2026); CV modelling, resource estimation, and the independent QA re-check ran across that same window, with the land-cover change rollout and Hansard corpus search completed by August 2026. Figures reflect the state of public disclosure as of that period, not real-time; see Known Limitations below.
+A facilities list was compiled and satellite imagery acquired during Phase 2 of the project workflow (March-June 2026); CV modelling and resource estimation ran across that same window, and the independent QA re-check was conducted during the same window period, with the land-cover change rollout and Hansard corpus search completed by August 2026. Figures reflect the state of public disclosure for the specified research time period, not real-time; see Known Limitations below.
 
 1. **Imagery acquisition**: candidate facility addresses/coordinates resolved via the Google Places API, satellite imagery pulled via the Google Static Maps API.
 2. **Building detection**: a confidence-scored, abstaining OpenCV pipeline (colour-space masking, dual-direction Otsu thresholding, multi-factor contour filtering) measures each facility's physical footprint; it declines to output a box where nothing reliable is found rather than forcing a detection. 124 candidate facilities were processed.
 3. **Validation and deduplication**: detected boxes are checked against source imagery, then co-located multi-tenant entries are collapsed into physical-building records (with an explicit, documented exception for genuinely distinct multi-building campuses sharing one imprecise geocode, e.g. AirTrunk JHB2/JHB3/JHB4). This reduced the candidate set to 71 physical buildings.
-4. **Independent QA re-check**: a second, separate verification pass (geometric re-check, coordinate-region plausibility check) run across the full 71-building dataset, not just the original validation sample. Found 11 buildings (15.5%) with an issue not caught by the pipeline's original automated flags, including three facilities whose coordinates resolve outside Malaysia.
+4. **Independent QA re-check**: a second, separate verification pass (geometric re-check, coordinate-region plausibility check) was run across the full 71-building dataset, not just the original validation sample. Found 11 buildings (15.5%) with an issue not caught by the pipeline's original automated flags, including three facilities whose coordinates resolve outside Malaysia.
 5. **Resource estimation**: footprint area converted to estimated power, annual energy, carbon emissions, and water use, with operator-disclosed and modelled facilities kept strictly separate rather than blended into one aggregate (see Valuation Benchmarking below for why).
-6. **Regulatory and legislative corpus analysis**: environmental-review policy mapping across every Malaysian jurisdiction with a measured facility, plus a systematic keyword search of the federal and Johor State Assembly Hansard record (2008–2026), and a comparative desk review of Indonesia's environmental-review architecture.
+6. **Regulatory and legislative corpus analysis**: environmental-review policy mapping across each Malaysian jurisdiction with a measured facility, plus a systematic keyword search of the federal and Johor State Assembly Hansard record (2008–2026), and a comparative desk review of Indonesia's environmental-review architecture.
 7. **Land-cover change rollout**: facilities grouped by single-linkage geographic clustering (8 km threshold) into development corridors, each checked as a Hansen Global Forest Change area of interest via Global Forest Watch to quantify deforestation associated with the corridor.
 
 Full formulas, coefficients, and caveats are in the companion reports listed under [Documentation](#documentation).
@@ -98,13 +98,13 @@ Full formulas, coefficients, and caveats are in the companion reports listed und
 
 The economic valuation paper benchmarks the pipeline's modelled power estimates against **operator-disclosed capacity** for the subset of facilities (7 of 71) where a specific MW figure is publicly disclosed, rather than against a single published industry coefficient treated as ground truth. The published reference coefficient used for the initial comparison is 1.5 kW/m² power density at PUE 1.4, a figure drawn from general industry guidance rather than a facility-specific measurement. Applying that coefficient to the disclosed-capacity facilities' CV-detected footprint area and comparing the implied density against each facility's actual disclosed density produced a spread of more than two orders of magnitude (approximately 0.36 kW/m² for a large colocation facility to approximately 40 kW/m² for a high-density liquid-cooled AI facility fragment). The paper argues this spread is not measurement noise but evidence of vintage capital heterogeneity (Solow's putty-clay framework) across a portfolio built over a decade or more, and situates the finding within the natural resource and industrial ecology aggregation-bias literature and the UN SEEA Central Framework for natural capital accounting (see [References](#references)).
 
-Other figures benchmarked in the paper: Malaysia's pledged data centre investment (RM280 billion since 2021, RM131 billion/47% realised as of May 2026, cited from public investment-tracking reporting); Peninsular Malaysia's estimated annual grid generation, against which the portfolio's modelled ~31,023.5 GWh/yr (~20.0% of grid generation) is compared; and a 360 MW Nvidia-backed campus in Batam, Indonesia, used as a comparative single-facility benchmark against the entire 71-building Malaysian dataset.
+Other figures benchmarked in the paper: Malaysia's pledged data centre investment (RM280 billion since 2021, RM131 billion/47% realised as of May 2026, cited from public investment-tracking reporting); Peninsular Malaysia's estimated annual grid generation, against which the portfolio's modelled ~31,023.5 GWh/yr (~20.0% of grid generation) is compared; and a 360 MW Nvidia-backed campus in Batam, Indonesia, used as a comparative single-facility benchmark against the 71 building candidates that formed the Malaysian dataset.
 
 ## References
 
 ### Companion documents
 
-These are the technical methodology, resource-estimation formulas, regulatory/legislative corpus analysis, land-cover change rollout, and full caveats, maintained alongside the underlying data corpus. They are grant deliverables under the project's funding agreement, published as static files under `docs/reports/` in this repository.
+The companion documents below cover the technical methodology, resource-estimation formulas, regulatory/legislative corpus analysis, land-cover change rollout, and full caveats, maintained alongside the underlying data corpus. They are grant deliverables under the project's funding agreement, published as static files under `docs/reports/` in this repository.
 
 - [Full Project Methodology - Satellite, Regulatory Corpus, and Land-Cover Change](docs/reports/full-project-methodology.docx)
 - [Economic Valuation Paper Draft - Vintage Capital Heterogeneity and Hidden Natural Capital Loss](docs/reports/economic-valuation-paper.docx)
