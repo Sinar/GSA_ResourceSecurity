@@ -152,4 +152,4 @@ Produced with support from the Global South Alliance Datafication and Democracy 
 
 ## License
 
-Not yet specified. Coordinate with Sinar Project before reuse or redistribution.
+This project is licensed under the [AGPL](LICENSE)
